@@ -64,7 +64,7 @@ warnings.warn(
 Album.objects.create(name='Mercury - Acts 1 & 2',
                      creation_datetime=timezone.now(),
                      release_datetime=datetime.datetime(2022, 7, 1),
-                     cost=19.99, artist=imagine_dragons.id)
+                     cost=19.99, artist=imagine_dragons)
 ```
 
 RuntimeWarning: DateTimeField Album.release_datetime received a naive datetime (2022-07-01 00:00:00) while time zone support is active.
