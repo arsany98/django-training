@@ -7,3 +7,5 @@ class Album(models.Model):
     creation_datetime = models.DateTimeField()
     release_datetime = models.DateTimeField()
     cost = models.DecimalField(max_digits=9, decimal_places=2)
+    def __str__(self):
+        return self.name
