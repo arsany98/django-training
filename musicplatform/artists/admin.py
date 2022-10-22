@@ -15,5 +15,5 @@ class AlbumsInline(admin.TabularInline):
     
 @admin.register(Artist)
 class ArtistAdmin(admin.ModelAdmin):
-    list_display = ('stage_name', 'get_num_of_approved_albums')
+    list_display = ('stage_name', 'approved_albums')
     inlines = (AlbumsInline,)
