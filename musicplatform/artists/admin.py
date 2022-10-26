@@ -7,9 +7,8 @@ from .models import Artist
 
 class AlbumsInline(admin.TabularInline):
     model = Album
-    fields = ('artist', 'name', 'creation_datetime',
+    fields = ('artist', 'name',
               'release_datetime', 'cost', 'is_approved')
-    readonly_fields = ('creation_datetime',)
     form = AlbumForm
     extra = 1
     
