@@ -1,0 +1,23 @@
+<h1>Artists</h1>
+<ul>
+  {% for artist in object_list %}
+  <li>id: {{ artist.id }}</li>
+  <li>Stage name: {{ artist.stage_name }}</li>
+  <li>Social: {{ artist.social_link }}</li>
+  <li>Albums:</li>
+  <ul>
+    {% for album in artist.albums.all %}
+    <li>id: {{ album.id }}</li>
+    <li>Name: {{ album.name }}</li>
+    <li>Creation Time: {{ album.created }}</li>
+    <li>Release datetime: {{ album.release_date_time }}</li>
+    <li>Cost: {{ album.cost }}</li>
+    <li>Is approved: {{ album.is_approved }}</li>
+    {% empty %}
+    <li>No albums yet.</li>
+    {% endfor %}
+  </ul>
+  {% empty %}
+  <li>No artists yet.</li>
+  {% endfor %}
+</ul>
