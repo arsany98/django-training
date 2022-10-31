@@ -34,14 +34,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'artists.apps.ArtistsConfig',
-    'albums.apps.AlbumsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'artists',
+    'albums',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'artists'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+MEDIA_URL = 'media/'
