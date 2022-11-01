@@ -1,3 +1,4 @@
+{% extends "base_site.html" %} {% block content %}
 <h1>Artists</h1>
 <ul>
   {% for artist in object_list %}
@@ -21,3 +22,4 @@
   <li>No artists yet.</li>
   {% endfor %}
 </ul>
+{% endblock %}
