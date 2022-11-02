@@ -1,8 +1,8 @@
-from django.forms import ModelForm
-
+from rest_framework import serializers
 from .models import Artist
 
-class ArtistForm(ModelForm):
+
+class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = '__all__'

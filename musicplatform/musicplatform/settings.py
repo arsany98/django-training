@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'artists',
     'albums',
     'imagekit',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
