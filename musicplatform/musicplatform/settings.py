@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'users',
+    'knox',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = 'media/'
 
 AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
+REST_KNOX = {
+    'USER_SERIALIZER': 'users.serializers.UserSerializer'
+}
