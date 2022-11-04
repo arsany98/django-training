@@ -3,7 +3,7 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 
 from .serializers import RegisterSerializer, LoginSerializer
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from knox import views
 
 
@@ -32,5 +32,8 @@ class LoginView(views.LoginView):
     def post(self, request, format=None):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid():
+            user = authenticate(request,
+                                username=serializer.data['username'], password=serializer.data['password'])
+            login(request, user)
             return super().post(request, format)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
