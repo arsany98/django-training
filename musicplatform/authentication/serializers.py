@@ -4,8 +4,10 @@ from django.contrib.auth import get_user_model, authenticate
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(style={'input_type': 'password'})
-    confirm_password = serializers.CharField(style={'input_type': 'password'})
+    password = serializers.CharField(
+        write_only=True, style={'input_type': 'password'})
+    confirm_password = serializers.CharField(
+        write_only=True, style={'input_type': 'password'})
 
     def validate_password(self, value):
         validate_password(value)
