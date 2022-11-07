@@ -4,7 +4,14 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
 
+class AlbumManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_approved=True)
+
+
 class Album(TimeStampedModel):
+    objects = models.Manager()
+    approved_albums = AlbumManager()
     artist = models.ForeignKey(
         'artists.Artist', related_name='albums', on_delete=models.CASCADE)
     name = models.CharField(max_length=50, default='New Album')
