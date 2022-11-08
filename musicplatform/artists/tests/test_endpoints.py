@@ -18,7 +18,7 @@ def test_create_artist(user):
     response = client.post('/artists/', {
         'stage_name': 'Imagine Dragons',
         'social_link': 'https://www.imaginedragonsmusic.com/',
-        'user': 1
+        'user': user1.id
     })
     assert response.status_code == 201
 
