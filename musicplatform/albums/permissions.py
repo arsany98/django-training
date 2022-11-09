@@ -6,7 +6,6 @@ class IsArtistOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
             return True
-        try:
-            return request.user.artist is not None
-        except ObjectDoesNotExist:
-            return False
+        if hasattr(request.user, 'artist'):
+            return True
+        return False

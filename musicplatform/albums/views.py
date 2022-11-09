@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from .models import Album
 from .serializers import AlbumSerializer
@@ -18,12 +18,12 @@ class AlbumListView(generics.ListCreateAPIView):
     filterset_class = AlbumFilter
 
     def post(self, request, *args, **kwargs):
-        serializer = AlbumSerializer(data=request.data)
+        serializer = AlbumSerializer(
+            data=request.data, context={'artist': request.user.artist})
         if serializer.is_valid():
-            serializer.validated_data['artist'] = request.user.artist
             serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class AlbumListFiltersView(generics.ListAPIView):
