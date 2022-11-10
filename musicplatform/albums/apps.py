@@ -8,5 +8,4 @@ class AlbumsConfig(AppConfig):
 
     def ready(self):
         from .signals import send_email
-        post_save.connect(send_email)
         return super().ready()
