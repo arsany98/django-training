@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import environ
-
+from celery.schedules import crontab
 env = environ.Env(DEBUG=(bool, False))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -150,3 +150,19 @@ REST_FRAMEWORK = {
 REST_KNOX = {
     'USER_SERIALIZER': 'users.serializers.UserSerializer'
 }
+
+CELERY_CONF_BROKER_URL = env('REDIS_URL')
+CELERY_CONF_RESULT_BACKEND = env('REDIS_URL')
+CELERY_CONF_BEAT_SCHEDULE = {
+    'send-inactivity-emails-every-day': {
+        'task': 'artists.tasks.send_inactivity_emails',
+        'schedule': crontab(minute=0, hour=0),
+    },
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
